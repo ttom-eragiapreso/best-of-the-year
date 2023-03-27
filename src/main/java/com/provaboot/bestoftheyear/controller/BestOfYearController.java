@@ -5,10 +5,13 @@ import com.provaboot.bestoftheyear.song.Song;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -33,6 +36,35 @@ public class BestOfYearController {
 
         model.addAttribute("songs", result + ".");
         return "songs";
+    }
+
+    @GetMapping("/songs/{id}")
+    public String detailSong(Model model, @PathVariable(required = false) int id){
+
+        List<Song> allSongs = listBestSongs();
+
+        Optional<Song> foundOrNot = allSongs.stream().filter((s) -> s.getId() == id).findFirst();
+
+        if(foundOrNot.isEmpty()){
+            return "redirect:/songs";
+        }else {
+            model.addAttribute("userSong", foundOrNot.get());
+            return "detail-song";
+        }
+    }
+    @GetMapping("/movies/{id}")
+    public String detailMovie(Model model, @PathVariable(required = false) int id){
+
+        List<Movie> allMovies = listBestMovies();
+
+        Optional<Movie> foundOrNot = allMovies.stream().filter((s) -> s.getId() == id).findFirst();
+
+        if(foundOrNot.isEmpty()){
+            return "redirect:/movies";
+        }else {
+            model.addAttribute("userMovie", foundOrNot.get());
+            return "detail-movie";
+        }
     }
 
     @GetMapping("/movies")
