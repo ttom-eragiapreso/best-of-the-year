@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -26,15 +27,10 @@ public class BestOfYearController {
     public String getBestSongs(Model model){
 
         List<Song> bestSongs = listBestSongs();
-        String output = "";
-        for (Song s :
-                bestSongs) {
-            output+= s.getTitle() + ", ";
-        }
 
-        String result = output.substring(0, output.length() -2 );
+        String output = bestSongs.stream().map(Song::getTitle).collect(Collectors.joining(", "));
 
-        model.addAttribute("songs", result + ".");
+        model.addAttribute("songs", output + ".");
         return "songs";
     }
 
