@@ -2,9 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:replace="~{fragments/fragments :: resources}">
     <title>Title</title>
 </head>
 <body>
-  <h1 >Best of the year <span th:text="${name}"></span></h1>
+<div th:replace="~{fragments/fragments :: navbar(home)}"></div>
+
+    <div class="container d-flex flex-column justify-content-center align-items-center mt-5">
+        <h1 >Best of the year <span th:text="${name}"></span></h1>
+        <div class="card" style="width: 50%;">
+            <img th:src="@{bg-test.jpg}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">lorem ipsum</p>
+            </div>
+    </div>
+
+
+</div>
+
 </body>
 </html>

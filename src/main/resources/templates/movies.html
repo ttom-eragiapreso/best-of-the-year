@@ -2,14 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:replace="~{fragments/fragments :: resources}">
     <title>Title</title>
 </head>
 <body>
+    <div th:replace="~{fragments/fragments :: navbar(movies)}"></div>
+
+    <div class="container text-center mt-5">
     <h1>The best movies are: </h1>
-    <ul>
-        <li th:each="movie : ${movies}">
+    <ul class="list-group list-group-flush">
+        <li th:each="movie : ${movies}" class="list-group-item">
             <a th:href="@{|/movies/${movie.id}|}" th:text="${movie.title}"></a>
         </li>
     </ul>
+    </div>
 </body>
 </html>

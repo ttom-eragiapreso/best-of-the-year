@@ -2,14 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:replace="~{fragments/fragments :: resources}">
     <title>Title</title>
 </head>
 <body>
-    <h1>Le migliori canzoni sono: </h1>
-    <ul>
-        <li th:each="song : ${songs}">
-            <a th:href="@{|/songs/${song.id}|}" th:text="${song.title}"></a>
-        </li>
-    </ul>
+<div th:replace="~{fragments/fragments :: navbar(songs)}"></div>
+
+    <div class="container text-center mt-5">
+        <h1>Le migliori canzoni sono: </h1>
+        <ul class="list-group list-group-flush">
+            <li th:each="song : ${songs}" class="list-group-item">
+                <a th:href="@{|/songs/${song.id}|}" th:text="${song.title}"></a>
+            </li>
+        </ul>
+    </div>
+
 </body>
 </html>
