@@ -6,6 +6,10 @@
 </head>
 <body>
     <h1>The best movies are: </h1>
-    <h2 th:text="${movies}"></h2>
+    <ul>
+        <li th:each="movie : ${movies}">
+            <a th:href="@{|/movies/${movie.id}|}" th:text="${movie.title}"></a>
+        </li>
+    </ul>
 </body>
 </html>

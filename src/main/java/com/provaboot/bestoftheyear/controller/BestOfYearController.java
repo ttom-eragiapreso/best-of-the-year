@@ -28,9 +28,9 @@ public class BestOfYearController {
 
         List<Song> bestSongs = listBestSongs();
 
-        String output = bestSongs.stream().map(Song::getTitle).collect(Collectors.joining(", "));
+        //String output = bestSongs.stream().map(Song::getTitle).collect(Collectors.joining(", "));
 
-        model.addAttribute("songs", output + ".");
+        model.addAttribute("songs", bestSongs);
         return "songs";
     }
 
@@ -67,16 +67,7 @@ public class BestOfYearController {
     public String getBestMovies(Model model){
 
         List<Movie> bestMovies = listBestMovies();
-        String output = "";
-
-        for (Movie m :
-                bestMovies) {
-            output+=m.getTitle() + ", ";
-        }
-
-        output = output.substring(0, output.length() -2);
-
-        model.addAttribute("movies", output + ".");
+        model.addAttribute("movies", bestMovies);
 
         return "movies";
     }
